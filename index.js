@@ -67,6 +67,21 @@ app.post("/update_book",(req,res)=>{
 
 
 
+
+app.post("/search_book",(req,res)=>{
+    const q="select * from book_data where book_name=?"
+    const value=[req.body.book_name]
+    db.query(q,[...value],(err,data)=>{
+        if(err){
+            return res.json(err)
+        }
+        else if(data){
+            return res.json(data)
+        }
+    })
+})
+
+
 app.post("/delete_book",(req,res)=>{
     const q="delete from book_data where book_id=?"
     const value=[req.body.book_id]
